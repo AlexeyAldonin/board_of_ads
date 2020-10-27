@@ -34,11 +34,13 @@ public class Posting {
         this.price = price;
         this.contact = contact;
         this.isActive = isActive;
+
     }
 
-    public Posting(User user, Category category, String title, String description, Long price, String contact, City city, Boolean isActive) {
+    public Posting(User user, Category category, String title, String description, Long price, String contact, City city, Boolean isActive,Integer viewNumber) {
         this(user, category, title, description, price, contact, isActive);
         this.city = city;
+        this.viewNumber = viewNumber;
     }
 
     @Id
@@ -75,6 +77,9 @@ public class Posting {
 
     @Column
     private Boolean isActive;
+
+    @Column
+    private Integer viewNumber;
 
     @Column
     private LocalDateTime datePosting = LocalDateTime.now();

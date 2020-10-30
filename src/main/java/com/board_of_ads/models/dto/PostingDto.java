@@ -21,9 +21,8 @@ public class PostingDto {
     private String city;
     private String meetingAddress;
     private Boolean isActive;
-    private Integer viewNumber;
 
-    public PostingDto(Long id, String title, String description, Long price, String contact, LocalDateTime datePosting, String city, Integer viewNumber) {
+    public PostingDto(Long id, String title, String description, Long price, String contact, LocalDateTime datePosting, String city) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -31,9 +30,8 @@ public class PostingDto {
         this.contact = contact;
         this.datePosting = datePosting;
         this.city = city;
-        this.viewNumber = viewNumber;
     }
-    public PostingDto(Long id, String title, String description, Long price, String contact, LocalDateTime datePosting, String city, Boolean isActive, Integer viewNumber) {
+    public PostingDto(Long id, String title, String description, Long price, String contact, LocalDateTime datePosting, String city, Boolean isActive) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -42,6 +40,5 @@ public class PostingDto {
         this.datePosting = datePosting;
         this.city = city;
         this.isActive = isActive;
-        this.viewNumber = viewNumber;
     }
 }

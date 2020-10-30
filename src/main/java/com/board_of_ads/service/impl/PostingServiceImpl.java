@@ -32,7 +32,6 @@ public class PostingServiceImpl implements PostingService {
         postingRepository.save(posting);
     }
 
-
     @Override
     public Posting getPostingById(Long id) {
         return postingRepository.getOne(id);
@@ -45,15 +44,13 @@ public class PostingServiceImpl implements PostingService {
 
     @Override
     public PostingDto getPostingDtoById(Long id) {
-        postingRepository.addViewNumber(id);
         PostingDto postingDto = postingRepository.getPostingDtoById(id);
         postingDto.setImages(getPostingById(postingDto.getId()).getImages());
         postingDto.setCategory(categoryService.getCategoryDtoById(
                 getPostingById(postingDto.getId()).getCategory().getId()).get());
-        if (getPostingById(postingDto.getId()).getCity() != null) {
+        if(getPostingById(postingDto.getId()).getCity() != null) {
             postingDto.setCity(getPostingById(postingDto.getId()).getCity().getName());
         }
-
         return postingDto;
     }
 
@@ -73,6 +70,7 @@ public class PostingServiceImpl implements PostingService {
     }
 
 
+
     @Override
     public List<PostingDto> getAllPostings() {
         List<PostingDto> postingDtos = postingRepository.findAllPostings();
@@ -86,13 +84,13 @@ public class PostingServiceImpl implements PostingService {
     }
 
     private List<PostingDto> getPostingDtos(List<PostingDto> postingDtos) {
-        for (PostingDto dto : postingDtos) {
-            dto.setImages(getPostingById(dto.getId()).getImages());
-            dto.setCategory(categoryService.getCategoryDtoById(
-                    postingRepository.findPostingByTitle(dto.getTitle()).getCategory().getId()).get());
-            if (getPostingById(dto.getId()).getCity() != null) {
-                dto.setCity(getPostingById(dto.getId()).getCity().getName());
-            }
+        for(PostingDto dto : postingDtos) {
+           dto.setImages(getPostingById(dto.getId()).getImages());
+           dto.setCategory(categoryService.getCategoryDtoById(
+                   postingRepository.findPostingByTitle(dto.getTitle()).getCategory().getId()).get());
+           if(getPostingById(dto.getId()).getCity() != null) {
+               dto.setCity(getPostingById(dto.getId()).getCity().getName());
+           }
         }
         return postingDtos;
     }
@@ -101,8 +99,8 @@ public class PostingServiceImpl implements PostingService {
     public List<PostingDto> searchPostings(String categorySelect, String citySelect, String searchText, String photoOption) {
 
         List<PostingDto> postingDtos;
-        if (citySelect != null && !(citySelect.equals("undefined"))) {
-            if (citySelect.matches("(.*)" + "Область" + "(.*)")
+        if(citySelect != null && !(citySelect.equals("undefined"))) {
+            if (citySelect.matches("(.*)" +"Область" + "(.*)")
                     || citySelect.matches("(.*)" + "Край" + "(.*)")
                     || citySelect.matches("(.*)" + "Республика" + "(.*)")
                     || citySelect.matches("(.*)" + "Автономный округ" + "(.*)")
@@ -129,36 +127,34 @@ public class PostingServiceImpl implements PostingService {
             } else if (postingDto.getCategory().equals(categorySelect)) {
                 categoryFlag = true;
             }
-            if (photoOption != null) {
-                if (photoOption.equals("пункт2")) {
-                    if (postingDto.getImages().size() > 0) {
+            if(photoOption != null) {
+                if(photoOption.equals("пункт2")) {
+                    if(postingDto.getImages().size() > 0) {
                         photoFlag = true;
                     }
-                } else if (photoOption.equals("пункт3")) {
-                    if (postingDto.getImages().size() == 0) {
+                } else if(photoOption.equals("пункт3")) {
+                    if(postingDto.getImages().size() == 0) {
                         photoFlag = true;
                     }
-                } else if (photoOption.equals("пункт1")) {
+                } else if(photoOption.equals("пункт1")) {
                     photoFlag = true;
                 }
             } else {
                 photoFlag = true;
             }
-            if (searchText != null && !(searchText.equals("")) && !(searchText.equals("undefined"))) {
-                if (postingDto.getTitle().toLowerCase().matches("(.*)" + searchText.toLowerCase() + "(.*)")) {
+            if(searchText != null && !(searchText.equals("")) && !(searchText.equals("undefined"))) {
+                if(postingDto.getTitle().toLowerCase().matches("(.*)" + searchText.toLowerCase() + "(.*)")) {
                     textFlag = true;
                 }
             } else {
                 textFlag = true;
             }
 
-            if (categoryFlag && photoFlag && textFlag) {
+            if(categoryFlag && photoFlag && textFlag) {
                 resultList.add(postingDto);
             }
         }
 
         return resultList;
     }
-
-
 }

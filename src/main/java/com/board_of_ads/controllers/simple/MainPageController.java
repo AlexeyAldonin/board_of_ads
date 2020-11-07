@@ -30,7 +30,8 @@ public class MainPageController {
     @GetMapping("/new_post")
     public String addNewPost(@AuthenticationPrincipal User user, Model model) {
         model.addAttribute("user", user != null ? user : new User());
-        return "new-post-page";
+      //return "new-post-page";
+       return "test";
     }
 
     @GetMapping("/{id}")

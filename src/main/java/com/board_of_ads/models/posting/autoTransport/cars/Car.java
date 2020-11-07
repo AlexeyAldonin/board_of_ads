@@ -22,7 +22,7 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Table(name = "posting_cars")
-public class Car extends AutoTransport {
+public class    Car extends AutoTransport {
 
     @Column
     private String VIN;

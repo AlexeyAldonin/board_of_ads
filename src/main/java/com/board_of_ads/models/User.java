@@ -1,8 +1,8 @@
 package com.board_of_ads.models;
 
 
+import com.board_of_ads.models.posting.personalBelongings.clothesShoesAccessories.Clothes;
 import com.board_of_ads.models.posting.Posting;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -100,6 +100,10 @@ public class User implements UserDetails {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true  )
     private List<UserNotification> notifications = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private Set<Clothes> clothes ;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
